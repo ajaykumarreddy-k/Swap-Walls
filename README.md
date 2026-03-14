@@ -1,9 +1,8 @@
-```markdown
 <div align="center">
   <img src="LOGO.jpg" alt="Swap-Walls Logo" width="200"/>
 
   # Swap-Walls 🖼️
-  
+
   **A beautiful, feature-rich Wallpaper App for Android — and my very first Kotlin project!**
 
   ![Version](https://img.shields.io/badge/Version-v1.1-blue.svg?style=for-the-badge)
@@ -18,7 +17,7 @@
 
 ## 📖 About The Project
 
-**Swap-Walls** is an Android application designed to breathe new life into your device's home and lock screens. Built natively with Kotlin, it features a massive, organized collection of high-quality wallpapers. 
+**Swap-Walls** is an Android application designed to breathe new life into your device's home and lock screens. Built natively with Kotlin, it features a massive, organized collection of high-quality wallpapers.
 
 Behind the scenes, the app utilizes a custom Python script (`prepare_wallpapers.py`) to automate the processing and organization of images, ensuring the app's database remains lightweight and easy to update.
 
@@ -41,86 +40,38 @@ Behind the scenes, the app utilizes a custom Python script (`prepare_wallpapers.
 
 ## 🚀 Getting Started
 
-### Option 1: Quick Install (Recommended)
-You can directly install the app on your Android device by downloading the latest APK:
+### Quick Install
+
+Download and install the latest APK directly on your Android device:
+
 1. Navigate to the root of this repository.
 2. Download `Swap Walls V1.1.apk`.
-3. Transfer it to your Android device and install (ensure "Install from Unknown Sources" is enabled in your device settings).
-
-### Option 2: Build from Source
-If you want to explore the code or contribute:
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/ajaykumarreddy-k/Swap-Walls.git](https://github.com/ajaykumarreddy-k/Swap-Walls.git)
-
-```
-
-2. **Open in Android Studio:**
-* Open Android Studio and select `File > Open`.
-* Navigate to the cloned `Swap-Walls` directory and select it.
-
-
-3. **Sync and Build:**
-* Allow Gradle to sync and download the required dependencies.
-* Click the **Run** button (Shift + F10) to build and deploy the app to your emulator or connected device.
-
-
-
-### 🐍 Updating Wallpapers (For Developers)
-
-To add new wallpapers to the manifest:
-
-1. Ensure Python and `uv` are installed.
-2. Place new raw images in the designated folder.
-3. Run the preparation script:
-```bash
-python prepare_wallpapers.py
-
-```
-
-
-
-This will automatically process the images into the `output/wallpapers` directory and update the `manifest.json`.
+3. Transfer it to your Android device and install (ensure **"Install from Unknown Sources"** is enabled in your device settings).
 
 ---
 
 ## 🎨 Credits & Acknowledgements
 
-**Disclaimer:** The beautiful wallpapers featured in this application are **not manually created by me**.
+**Disclaimer:** The wallpapers featured in this application are **not created by me**.
 
-They have been handpicked and curated from various incredible, free-to-use platforms and talented creators across the internet. All intellectual property rights and credits for the artwork belong entirely to their respective original artists and hosting platforms. Swap-Walls merely serves as a gallery to showcase their amazing work on your mobile device.
+They have been handpicked and curated from various free-to-use platforms and talented creators across the internet. All intellectual property rights belong entirely to their respective original artists and hosting platforms. Swap-Walls merely serves as a gallery to showcase their work on your device.
 
 ---
 
 ## ☕ Support & Donations
 
-Building, maintaining, and curating this app takes a lot of time and coffee! If you love using Swap-Walls and want to support the development (and help me keep the servers/tools running), consider buying me a cup of coffee.
+Building, maintaining, and curating this app takes a lot of time and coffee! If you love using Swap-Walls and want to support the development, consider buying me a cup of coffee.
 
 Scan the QR code below to donate:
 
 <div align="center">
-<img src="Scanner-Buy me a cup" alt="Donate QR Code" width="250"/>
-
-
-
-
-
-<i>Thank you for your support! ❤️</i>
+  <img src="Scanner-Buy me a cup/payment scanenr.jpeg" alt="Donate QR Code" width="250"/>
+  <br/><br/>
+  <i>Thank you for your support! ❤️</i>
 </div>
 
 ---
 
 <div align="center">
-<b>Developed with 💻 by <a href="https://github.com/ajaykumarreddy-k">Ajay Kumar Reddy</a></b>
+  <b>Developed with 💻 by <a href="https://github.com/ajaykumarreddy-k">Ajay Kumar Reddy</a></b>
 </div>
-
-```
-
-### A Quick Tip on Your Files:
-
-Make sure the file named `Scanner-Buy me a cup` actually has its image extension in your GitHub repo (for example, `Scanner-Buy me a cup.jpg` or `.png`). If it does, you will need to update the file path in the Markdown code under the **Support & Donations** section so the image renders properly (e.g., `<img src="Scanner-Buy me a cup.png" ... />`).
-
-Would you like me to help you set up a `.gitignore` file so that temporary files like `.~lock.WallDrop_Code.docx#` and `.idea` don't accidentally get pushed to your public repository in the future?
-
-```
