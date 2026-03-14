@@ -11,9 +11,9 @@ data class Wallpaper(
 ) {
     // Full-resolution URL
     fun fullUrl(categoryId: String): String =
-        "https://raw.githubusercontent.com/ajaykumarreddy-k/Swap-Walls/main/wallpapers/${categoryId}/${file}"
+        "https://raw.githubusercontent.com/ajaykumarreddy-k/Swap-Walls/main/output/wallpapers/${categoryId}/${file}"
  
     // Thumbnail URL (used in grids for fast loading)
     fun thumbUrl(categoryId: String): String =
-        "https://raw.githubusercontent.com/ajaykumarreddy-k/Swap-Walls/main/wallpapers/${categoryId}/${thumb}"
+        "https://raw.githubusercontent.com/ajaykumarreddy-k/Swap-Walls/main/output/wallpapers/${categoryId}/${thumb}"
 }
