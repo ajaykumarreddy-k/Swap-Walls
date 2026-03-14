@@ -20,6 +20,7 @@ import com.swapwalls.walldrop.viewmodel.HomeViewModel
 @Composable
 fun HomeScreen(
     onCategoryClick: (String) -> Unit,
+    onSettingsClick: () -> Unit,
     viewModel: HomeViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -30,7 +31,7 @@ fun HomeScreen(
             TopAppBar(
                 title = { Text("WallDrop", style = MaterialTheme.typography.headlineMedium) },
                 actions = {
-                    IconButton(onClick = { /* settings - future */ }) {
+                    IconButton(onClick = onSettingsClick) {
                         Icon(Icons.Default.Settings, contentDescription = "Settings")
                     }
                 },

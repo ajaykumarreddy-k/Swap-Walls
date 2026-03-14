@@ -6,6 +6,6 @@ import retrofit2.http.GET
 interface ApiService {
     // Fetches the full manifest from GitHub
     // Full URL = BASE_URL + this path
-    @GET("YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/main/manifest.json")
+    @GET("ajaykumarreddy-k/Swap-Walls/main/manifest.json")
     suspend fun getManifest(): WallpaperManifest
 }

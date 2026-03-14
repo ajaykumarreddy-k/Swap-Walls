@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.swapwalls.walldrop.ui.screens.CategoryScreen
 import com.swapwalls.walldrop.ui.screens.HomeScreen
+import com.swapwalls.walldrop.ui.screens.SettingsScreen
 import com.swapwalls.walldrop.ui.screens.WallpaperDetailScreen
 import com.swapwalls.walldrop.ui.theme.WallDropTheme
  
@@ -35,6 +36,9 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(
                                 onCategoryClick = { categoryId ->
                                     navController.navigate("category/$categoryId")
+                                },
+                                onSettingsClick = {
+                                    navController.navigate("settings")
                                 }
                             )
                         }
@@ -52,7 +56,6 @@ class MainActivity : ComponentActivity() {
                             )
                         }
  
-                        // Screen 3: Wallpaper detail — full screen preview + apply
                         composable(
                             route = "detail/{categoryId}/{wallpaperId}",
                             arguments = listOf(
@@ -65,6 +68,11 @@ class MainActivity : ComponentActivity() {
                                 wallpaperId  = backStackEntry.arguments?.getString("wallpaperId") ?: "",
                                 onBack       = { navController.navigateUp() }
                             )
+                        }
+ 
+                        // Screen 4: Settings
+                        composable("settings") {
+                            SettingsScreen(onBack = { navController.navigateUp() })
                         }
                     }
                 }

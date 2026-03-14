@@ -1,0 +1,16 @@
+[project]
+name = "swap-walls-assets"
+version = "0.1.0"
+description = "Wallpaper preparation scripts for Swap Walls"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "Pillow>=10.0.0",
+    "colorthief>=0.2.1",
+]
+
+[tool.uv]
+dev-dependencies = []
+
+[project.scripts]
+prepare = "prepare_wallpapers:prepare_assets"

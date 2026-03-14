@@ -25,14 +25,12 @@ fun CategoryCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(0.75f)
+            .aspectRatio(0.8f)
             .clickable { onClick() },
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        shape = RoundedCornerShape(24.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
- 
-            // Cover image: first wallpaper's thumbnail
             AsyncImage(
                 model = category.coverThumbUrl(),
                 contentDescription = category.name,
@@ -40,40 +38,46 @@ fun CategoryCard(
                 modifier = Modifier.fillMaxSize()
             )
  
-            // Gradient overlay so text is readable
+            // Better Gradient for premium feel
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(
                         Brush.verticalGradient(
-                            colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.7f)),
-                            startY = 200f
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Black.copy(alpha = 0.2f),
+                                Color.Black.copy(alpha = 0.85f)
+                            ),
+                            startY = 100f
                         )
                     )
             )
  
-            // Category name + count at bottom
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .padding(12.dp)
+                    .padding(16.dp)
             ) {
                 Text(
                     text = category.name,
                     color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.ExtraBold
                 )
                 Spacer(Modifier.height(4.dp))
+                
+                // Glassmorphic chip
                 Surface(
-                    shape = RoundedCornerShape(50),
-                    color = Color.White.copy(alpha = 0.25f)
+                    shape = RoundedCornerShape(12.dp),
+                    color = Color.White.copy(alpha = 0.15f),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, Color.White.copy(alpha = 0.2f))
                 ) {
                     Text(
-                        text = "${category.count} walls",
-                        color = Color.White,
-                        fontSize = 11.sp,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        text = "${category.count} Wallpapers",
+                        color = Color.White.copy(alpha = 0.9f),
+                        style = MaterialTheme.typography.labelMedium,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
                     )
                 }
             }

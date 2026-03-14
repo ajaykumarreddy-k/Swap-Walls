@@ -2,23 +2,19 @@
 """
 prepare_wallpapers.py
 ---------------------
-Resizes wallpaper images, creates thumbnails, and updates manifest.json.
+Scans 'input/' for subfolders (categories), resizes images, 
+creates thumbnails, and generates a structured manifest.json.
  
 Usage:
-    pip install Pillow colorthief
-    python prepare_wallpapers.py --category nature
- 
-Put source images in ./input/ before running.
-Processed images go to ./output/<category>/
-manifest.json is updated automatically.
+    python prepare_wallpapers.py
 """
  
 import os
 import sys
 import json
-import argparse
 import shutil
 from pathlib import Path
+from datetime import date
  
 try:
     from PIL import Image
@@ -32,13 +28,11 @@ FULL_MAX_WIDTH  = 1080
 FULL_MAX_HEIGHT = 1920
 THUMB_WIDTH     = 400
 THUMB_HEIGHT    = 700
-QUALITY         = 88  # JPEG quality (1-95)
- 
+QUALITY         = 88
  
 def resize_image(img: Image.Image, max_w: int, max_h: int) -> Image.Image:
     img.thumbnail((max_w, max_h), Image.LANCZOS)
     return img
- 
  
 def get_dominant_color(filepath: str) -> str:
     try:
@@ -48,98 +42,79 @@ def get_dominant_color(filepath: str) -> str:
     except Exception:
         return "#1565C0"
  
- 
-def next_id(existing_ids: list, category: str) -> str:
-    """Generate next ID like nature_042"""
-    nums = []
-    prefix = category + "_"
-    for eid in existing_ids:
-        if eid.startswith(prefix):
-            try:
-                nums.append(int(eid[len(prefix):]))
-            except ValueError:
-                pass
-    next_num = max(nums) + 1 if nums else 1
-    return f"{category}_{next_num:03d}"
- 
- 
-def process_images(category: str):
-    input_dir  = Path("input")
-    output_dir = Path("output") / category
-    output_dir.mkdir(parents=True, exist_ok=True)
- 
+def prepare_assets():
+    input_root = Path("images")
+    output_root = Path("output")
     manifest_path = Path("manifest.json")
-    if manifest_path.exists():
-        with open(manifest_path) as f:
-            manifest = json.load(f)
-    else:
-        manifest = {"version": 1, "updated": "", "categories": []}
  
-    # Find or create the category in manifest
-    cat_entry = next((c for c in manifest["categories"] if c["id"] == category), None)
-    if cat_entry is None:
-        cat_entry = {"id": category, "name": category.capitalize(), "icon": "image", "wallpapers": []}
-        manifest["categories"].append(cat_entry)
+    if not input_root.exists():
+        input_root.mkdir()
+        print("Created 'images/' folder. Please add category subfolders (e.g. images/anime/) and run again.")
+        return
  
-    existing_files = {w["file"] for w in cat_entry["wallpapers"]}
-    existing_ids   = [w["id"] for w in cat_entry["wallpapers"]]
- 
+    manifest = {"version": 1, "updated": str(date.today()), "categories": []}
     supported = {".jpg", ".jpeg", ".png", ".webp"}
-    added = 0
  
-    for src_path in sorted(input_dir.iterdir()):
-        if src_path.suffix.lower() not in supported:
-            continue
-        if src_path.name in existing_files:
-            print(f"  Skip (already in manifest): {src_path.name}")
-            continue
+    # Scan for subdirectories in images/
+    categories = [d for d in input_root.iterdir() if d.is_dir()]
+    
+    if not categories:
+        print("No category subfolders found in 'images/'. Example: images/anime/")
+        return
  
-        print(f"  Processing: {src_path.name}")
-        stem = src_path.stem.lower().replace(" ", "_")
-        out_file  = f"{stem}.jpg"
-        out_thumb = f"{stem}_thumb.jpg"
- 
-        # Full size
-        img_full = Image.open(src_path).convert("RGB")
-        img_full = resize_image(img_full, FULL_MAX_WIDTH, FULL_MAX_HEIGHT)
-        full_path = output_dir / out_file
-        img_full.save(full_path, "JPEG", quality=QUALITY)
- 
-        # Thumbnail
-        img_thumb = Image.open(src_path).convert("RGB")
-        img_thumb = resize_image(img_thumb, THUMB_WIDTH, THUMB_HEIGHT)
-        thumb_path = output_dir / out_thumb
-        img_thumb.save(thumb_path, "JPEG", quality=QUALITY)
- 
-        # Dominant color
-        color = get_dominant_color(str(full_path))
- 
-        # New manifest entry
-        new_id = next_id(existing_ids, category)
-        existing_ids.append(new_id)
-        cat_entry["wallpapers"].append({
-            "id":    new_id,
-            "title": stem.replace("_", " ").title(),
-            "file":  out_file,
-            "thumb": out_thumb,
-            "color": color
+    for cat_dir in categories:
+        cat_id = cat_dir.name.lower()
+        print(f"Processing Category: {cat_dir.name}")
+        
+        cat_output = output_root / "wallpapers" / cat_id
+        cat_output.mkdir(parents=True, exist_ok=True)
+        
+        wallpapers = []
+        count = 1
+        
+        for img_path in sorted(cat_dir.iterdir()):
+            if img_path.suffix.lower() not in supported:
+                continue
+            
+            print(f"  -> {img_path.name}")
+            stem = img_path.stem.lower().replace(" ", "_")
+            out_file = f"{stem}.jpg"
+            out_thumb = f"{stem}_thumb.jpg"
+            
+            # Save Full
+            img = Image.open(img_path).convert("RGB")
+            img = resize_image(img, FULL_MAX_WIDTH, FULL_MAX_HEIGHT)
+            img.save(cat_output / out_file, "JPEG", quality=QUALITY)
+            
+            # Save Thumb
+            img_t = Image.open(img_path).convert("RGB")
+            img_t = resize_image(img_t, THUMB_WIDTH, THUMB_HEIGHT)
+            img_t.save(cat_output / out_thumb, "JPEG", quality=QUALITY)
+            
+            # Color
+            color = get_dominant_color(str(cat_output / out_file))
+            
+            wallpapers.append({
+                "id": f"{cat_id}_{count:03d}",
+                "title": stem.replace("_", " ").title(),
+                "file": out_file,
+                "thumb": out_thumb,
+                "color": color
+            })
+            count += 1
+            
+        manifest["categories"].append({
+            "id": cat_id,
+            "name": cat_dir.name.title(),
+            "icon": "image",
+            "wallpapers": wallpapers
         })
-        added += 1
- 
-    # Update manifest date
-    from datetime import date
-    manifest["updated"] = str(date.today())
  
     with open(manifest_path, "w") as f:
         json.dump(manifest, f, indent=2)
- 
-    print(f"\nDone. Added {added} wallpapers to category '{category}'.")
-    print(f"Files are in: {output_dir}")
-    print(f"manifest.json updated.")
- 
+    
+    print(f"\nSuccess! manifest.json updated with {len(categories)} categories.")
+    print(f"Assets created in {output_root}/wallpapers/")
  
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--category", required=True, help="Category slug, e.g. 'nature'")
-    args = parser.parse_args()
-    process_images(args.category.lower())
+    prepare_assets()
