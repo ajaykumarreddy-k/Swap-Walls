@@ -1,5 +1,6 @@
 package com.swapwalls.walldrop.ui.components
  
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,9 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.swapwalls.walldrop.data.models.Wallpaper
- 
+
 @Composable
 fun WallpaperCard(
     wallpaper: Wallpaper,
@@ -27,13 +28,19 @@ fun WallpaperCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
-        AsyncImage(
+        SubcomposeAsyncImage(
             model = wallpaper.thumbUrl(categoryId),
             contentDescription = wallpaper.title.ifEmpty { "Wallpaper" },
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
+                .wrapContentHeight(),
+            loading = {
+                ShimmerEffect(modifier = Modifier.fillMaxWidth().aspectRatio(0.6f))
+            },
+            error = {
+                Box(Modifier.fillMaxWidth().aspectRatio(0.6f).background(Color.DarkGray))
+            }
         )
     }
 }
