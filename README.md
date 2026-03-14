@@ -1,9 +1,3 @@
-This is a huge milestone—congratulations on building and shipping your first Kotlin app! The architecture looks great, especially since you've integrated Python (`prepare_wallpapers.py`) to automate the wallpaper preparation. That’s a very smart way to handle data ingestion for an Android project.
-
-Here is a complete, polished `README.md` file tailored exactly to your repository. It includes the beautiful badges, references your local `LOGO.jpg`, includes the disclaimer/credits for the wallpapers, and sets up a clean donation section pointing to your "Buy me a cup" scanner.
-
-You can copy the markdown code below and paste it directly into your `README.md` file on GitHub.
-
 ```markdown
 <div align="center">
   <img src="LOGO.jpg" alt="Swap-Walls Logo" width="200"/>
