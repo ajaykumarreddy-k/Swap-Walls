@@ -9,10 +9,66 @@
       "wallpapers": [
         {
           "id": "anime_001",
+          "title": "1358577",
+          "file": "1358577.jpg",
+          "thumb": "1358577_thumb.jpg",
+          "color": "#EAE3D3"
+        },
+        {
+          "id": "anime_002",
+          "title": "164942",
+          "file": "164942.jpg",
+          "thumb": "164942_thumb.jpg",
+          "color": "#DACAAB"
+        },
+        {
+          "id": "anime_003",
           "title": "Mushahi ",
           "file": "mushahi_.jpg",
           "thumb": "mushahi__thumb.jpg",
           "color": "#F9E3CB"
+        }
+      ]
+    },
+    {
+      "id": "abstract",
+      "name": "Abstract",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "abstract_001",
+          "title": "Dark Blue Glass Gradient Wallpaper",
+          "file": "dark_blue_glass_gradient_wallpaper.jpg",
+          "thumb": "dark_blue_glass_gradient_wallpaper_thumb.jpg",
+          "color": "#5B95C9"
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "architecture_001",
+          "title": "22278",
+          "file": "22278.jpg",
+          "thumb": "22278_thumb.jpg",
+          "color": "#060808"
+        }
+      ]
+    },
+    {
+      "id": "nature",
+      "name": "Nature",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "nature_001",
+          "title": "Photo-1436891620584-47Fd0E565Afb",
+          "file": "photo-1436891620584-47fd0e565afb.jpg",
+          "thumb": "photo-1436891620584-47fd0e565afb_thumb.jpg",
+          "color": "#252A44"
         }
       ]
     }

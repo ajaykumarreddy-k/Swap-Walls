@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
@@ -61,10 +62,9 @@ fun WallpaperDetailScreen(
  
         Box(modifier = Modifier
             .fillMaxSize()
-            .clickable { showSheet = true }
+            .clickable { showSheet = !showSheet } // Toggle UI visibility
         ) {
             wallpaper?.let { wp ->
-                // Full screen image: first load thumb as placeholder, then full image
                 AsyncImage(
                     model = ImageRequest.Builder(context)
                         .data(wp.fullUrl(categoryId))
@@ -76,79 +76,44 @@ fun WallpaperDetailScreen(
                 )
             }
  
-            // Back button — always visible top left
-            IconButton(
-                onClick = onBack,
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .statusBarsPadding()
-                    .padding(8.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back",
-                    tint = Color.White,
-                    modifier = Modifier.size(28.dp)
-                )
-            }
-        }
- 
-        // Bottom sheet: Set Wallpaper options
-        if (showSheet) {
-            ModalBottomSheet(
-                onDismissRequest = { showSheet = false }
-            ) {
-                Column(
+            // Animated UI overlay (Back button + Bottom Button)
+            if (showSheet) {
+                // Back button
+                IconButton(
+                    onClick = onBack,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 32.dp)
+                        .align(Alignment.TopStart)
+                        .statusBarsPadding()
+                        .padding(8.dp)
                 ) {
-                    wallpaper?.title?.takeIf { it.isNotEmpty() }?.let { title ->
-                        Text(title, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                        Spacer(Modifier.height(16.dp))
-                    }
- 
-                    // Primary action
-                    Button(
-                        onClick = { showTargetDialog = true },
-                        modifier = Modifier.fillMaxWidth(),
-                        enabled = !isSettingWallpaper
-                    ) {
-                        if (isSettingWallpaper) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(20.dp),
-                                color = Color.White,
-                                strokeWidth = 2.dp
-                            )
-                        } else {
-                            Text("Set as Wallpaper")
-                        }
-                    }
- 
-                    Spacer(Modifier.height(8.dp))
- 
-                    // Share button
-                    OutlinedButton(
-                        onClick = {
-                            wallpaper?.let { wp ->
-                                val sendIntent = android.content.Intent().apply {
-                                    action = android.content.Intent.ACTION_SEND
-                                    putExtra(android.content.Intent.EXTRA_TEXT, wp.fullUrl(categoryId))
-                                    type = "text/plain"
-                                }
-                                context.startActivity(android.content.Intent.createChooser(sendIntent, "Share wallpaper"))
-                            }
-                        },
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text("Share")
-                    }
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back",
+                        tint = Color.White,
+                        modifier = Modifier.size(28.dp)
+                    )
+                }
+
+                // Bottom Floating Action Button for "Set Wallpaper"
+                ExtendedFloatingActionButton(
+                    onClick = { showTargetDialog = true },
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .navigationBarsPadding()
+                        .padding(bottom = 32.dp),
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    shape = RoundedCornerShape(24.dp)
+                ) {
+                    if (isSettingWallpaper) {
+                    CircularProgressIndicator(size = 20.dp, color = MaterialTheme.colorScheme.onPrimary)
+                } else {
+                    Text("Apply Wallpaper", fontWeight = FontWeight.Bold)
                 }
             }
         }
- 
-        // Dialog: choose Home / Lock / Both
+
+        // Dialog: choose Home / Lock / Both — Inside the Scaffold content
         if (showTargetDialog) {
             AlertDialog(
                 onDismissRequest = { showTargetDialog = false },
