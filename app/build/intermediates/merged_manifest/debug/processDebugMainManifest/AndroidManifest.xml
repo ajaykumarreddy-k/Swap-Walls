@@ -23,6 +23,7 @@
         android:debuggable="true"
         android:extractNativeLibs="false"
         android:icon="@drawable/app_logo"
+        android:label="Swap Walls"
         android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.WallDrop" >
