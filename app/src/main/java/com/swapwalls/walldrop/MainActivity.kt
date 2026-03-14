@@ -33,48 +33,35 @@ fun MainScreen() {
             val showBottomBar = currentDestination in listOf("home", "settings", "donation")
             if (showBottomBar) {
                 NavigationBar {
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Default.Home, contentDescription = null) },
-                        label = { Text("Home") },
-                        selected = currentDestination == "home",
-                        onClick = {
-                            if (currentDestination != "home") {
-                                navController.navigate("home") {
-                                    popUpTo("home") { saveState = true }
-                                    launchSingleTop = true
-                                    restoreState = true
+                    val screens = listOf(
+                        Triple("home", Icons.Default.Home, "Home"),
+                        Triple("settings", Icons.Default.Settings, "Settings"),
+                        Triple("donation", Icons.Default.Favorite, "Donate")
+                    )
+                    screens.forEach { (route, icon, label) ->
+                        NavigationBarItem(
+                            icon = { Icon(icon, contentDescription = null) },
+                            label = { Text(label) },
+                            selected = currentDestination == route,
+                            onClick = {
+                                if (currentDestination != route) {
+                                    navController.navigate(route) {
+                                        // Pop up to the start destination of the graph to
+                                        // avoid building up a large stack of destinations
+                                        // on the back stack as users select items
+                                        popUpTo("home") {
+                                            saveState = true
+                                        }
+                                        // Avoid multiple copies of the same destination when
+                                        // reselecting the same item
+                                        launchSingleTop = true
+                                        // Restore state when reselecting a previously selected item
+                                        restoreState = true
+                                    }
                                 }
                             }
-                        }
-                    )
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Default.Settings, contentDescription = null) },
-                        label = { Text("Settings") },
-                        selected = currentDestination == "settings",
-                        onClick = {
-                            if (currentDestination != "settings") {
-                                navController.navigate("settings") {
-                                    popUpTo("home") { saveState = true }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            }
-                        }
-                    )
-                    NavigationBarItem(
-                        icon = { Icon(Icons.Default.Favorite, contentDescription = null) },
-                        label = { Text("Donate") },
-                        selected = currentDestination == "donation",
-                        onClick = {
-                            if (currentDestination != "donation") {
-                                navController.navigate("donation") {
-                                    popUpTo("home") { saveState = true }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            }
-                        }
-                    )
+                        )
+                    }
                 }
             }
         }
@@ -90,7 +77,11 @@ fun MainScreen() {
                         navController.navigate("category/$categoryId")
                     },
                     onSettingsClick = {
-                        navController.navigate("settings")
+                        navController.navigate("settings") {
+                            popUpTo("home") { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
                 )
             }

@@ -3,6 +3,48 @@
   "updated": "2026-03-14",
   "categories": [
     {
+      "id": "birds",
+      "name": "Birds",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "birds_001",
+          "title": "Chjpdmf0Zs9Sci9Pbwfnzxmvd2Vic2L0Zs8Ymdi2Ltayl3Jhd3Bpegvsb2Zmawnlmv9Iaxjkx2Zsev9Pbl90Agvfymx1Zv9Za3Lfc2Nlbmvfd2Fsbhbhcgvyx2Jhy2Tncl9Kn2Izodg4Zc02Nzdlltrmnwetowmxnc0Zota0Ymzhzjnknjuuanbn",
+          "file": "chjpdmf0zs9sci9pbwfnzxmvd2vic2l0zs8ymdi2ltayl3jhd3bpegvsb2zmawnlmv9iaxjkx2zsev9pbl90agvfymx1zv9za3lfc2nlbmvfd2fsbhbhcgvyx2jhy2tncl9kn2izodg4zc02nzdlltrmnwetowmxnc0zota0ymzhzjnknjuuanbn.jpg",
+          "thumb": "chjpdmf0zs9sci9pbwfnzxmvd2vic2l0zs8ymdi2ltayl3jhd3bpegvsb2zmawnlmv9iaxjkx2zsev9pbl90agvfymx1zv9za3lfc2nlbmvfd2fsbhbhcgvyx2jhy2tncl9kn2izodg4zc02nzdlltrmnwetowmxnc0zota0ymzhzjnknjuuanbn_thumb.jpg",
+          "color": "#284955"
+        }
+      ]
+    },
+    {
+      "id": "vintage",
+      "name": "Vintage",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "vintage_001",
+          "title": "9098912C68944C798E511F4D06B4A9B0",
+          "file": "9098912c68944c798e511f4d06b4a9b0.jpg",
+          "thumb": "9098912c68944c798e511f4d06b4a9b0_thumb.jpg",
+          "color": "#222222"
+        }
+      ]
+    },
+    {
+      "id": "cyberpunk",
+      "name": "Cyberpunk",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "cyberpunk_001",
+          "title": "Wp13455912-Cyberpunk-2077-4K-Phone-Wallpapers",
+          "file": "wp13455912-cyberpunk-2077-4k-phone-wallpapers.jpg",
+          "thumb": "wp13455912-cyberpunk-2077-4k-phone-wallpapers_thumb.jpg",
+          "color": "#1A406B"
+        }
+      ]
+    },
+    {
       "id": "anime",
       "name": "Anime",
       "icon": "image",
@@ -31,6 +73,20 @@
       ]
     },
     {
+      "id": "minimal",
+      "name": "Minimal",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "minimal_001",
+          "title": "4B4B8589A1Aa7Bb6104F98C2D165E6F0",
+          "file": "4b4b8589a1aa7bb6104f98c2d165e6f0.jpg",
+          "thumb": "4b4b8589a1aa7bb6104f98c2d165e6f0_thumb.jpg",
+          "color": "#040511"
+        }
+      ]
+    },
+    {
       "id": "abstract",
       "name": "Abstract",
       "icon": "image",
@@ -41,6 +97,83 @@
           "file": "dark_blue_glass_gradient_wallpaper.jpg",
           "thumb": "dark_blue_glass_gradient_wallpaper_thumb.jpg",
           "color": "#5B95C9"
+        }
+      ]
+    },
+    {
+      "id": "flowers",
+      "name": "Flowers",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "flowers_001",
+          "title": " ",
+          "file": "_.jpg",
+          "thumb": "__thumb.jpg",
+          "color": "#252627"
+        }
+      ]
+    },
+    {
+      "id": "gradient",
+      "name": "Gradient",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "gradient_001",
+          "title": "827C2447Cea82Cf5Be38309391890Ed6",
+          "file": "827c2447cea82cf5be38309391890ed6.jpg",
+          "thumb": "827c2447cea82cf5be38309391890ed6_thumb.jpg",
+          "color": "#0F406E"
+        }
+      ]
+    },
+    {
+      "id": "technology",
+      "name": "Technology",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "technology_001",
+          "title": "2Dc1F9746F13522Ec3Ab74114Bdb403E",
+          "file": "2dc1f9746f13522ec3ab74114bdb403e.jpg",
+          "thumb": "2dc1f9746f13522ec3ab74114bdb403e_thumb.jpg",
+          "color": "#201F1E"
+        }
+      ]
+    },
+    {
+      "id": "amoled",
+      "name": "Amoled",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "amoled_001",
+          "title": "Pexels-Photo-4004375",
+          "file": "pexels-photo-4004375.jpg",
+          "thumb": "pexels-photo-4004375_thumb.jpg",
+          "color": "#1C1D24"
+        }
+      ]
+    },
+    {
+      "id": "cities",
+      "name": "Cities",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "cities_001",
+          "title": "06674027Bb8B46723C7Be884E53Add58",
+          "file": "06674027bb8b46723c7be884e53add58.jpg",
+          "thumb": "06674027bb8b46723c7be884e53add58_thumb.jpg",
+          "color": "#835761"
+        },
+        {
+          "id": "cities_002",
+          "title": "635220294D3C975F6Fe031F3793D1Fd8",
+          "file": "635220294d3c975f6fe031f3793d1fd8.jpg",
+          "thumb": "635220294d3c975f6fe031f3793d1fd8_thumb.jpg",
+          "color": "#3A3D3E"
         }
       ]
     },
@@ -69,6 +202,153 @@
           "file": "photo-1436891620584-47fd0e565afb.jpg",
           "thumb": "photo-1436891620584-47fd0e565afb_thumb.jpg",
           "color": "#252A44"
+        }
+      ]
+    },
+    {
+      "id": "aesthetic",
+      "name": "Aesthetic",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "aesthetic_001",
+          "title": "Chjpdmf0Zs9Sci9Pbwfnzxmvd2Vic2L0Zs8Ymdizltewl2Pvyje4Mtvkzxnpz24Tcmvtaxgtmtbhlwquanbn",
+          "file": "chjpdmf0zs9sci9pbwfnzxmvd2vic2l0zs8ymdizltewl2pvyje4mtvkzxnpz24tcmvtaxgtmtbhlwquanbn.jpg",
+          "thumb": "chjpdmf0zs9sci9pbwfnzxmvd2vic2l0zs8ymdizltewl2pvyje4mtvkzxnpz24tcmvtaxgtmtbhlwquanbn_thumb.jpg",
+          "color": "#D4D3D1"
+        }
+      ]
+    },
+    {
+      "id": "desert",
+      "name": "Desert",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "desert_001",
+          "title": "Chjpdmf0Zs9Sci9Pbwfnzxmvd2Vic2L0Zs8Ymdi0Ltaxl3Jhd3Bpegvsb2Zmawnlov9Wag90B19Vzl9Tyxjzx2Fuzf9Tawxrev93Yxlfyxrfbmlnahrfz2Fsyxh5X3Dhbf8Yoti1Yzq3Zc0Xymu5Ltrjzjityty1Mi0Yngzlnjvhmjm4Mdhfms5Qcgc",
+          "file": "chjpdmf0zs9sci9pbwfnzxmvd2vic2l0zs8ymdi0ltaxl3jhd3bpegvsb2zmawnlov9wag90b19vzl9tyxjzx2fuzf9tawxrev93yxlfyxrfbmlnahrfz2fsyxh5x3dhbf8yoti1yzq3zc0xymu5ltrjzjityty1mi0yngzlnjvhmjm4mdhfms5qcgc.jpg",
+          "thumb": "chjpdmf0zs9sci9pbwfnzxmvd2vic2l0zs8ymdi0ltaxl3jhd3bpegvsb2zmawnlov9wag90b19vzl9tyxjzx2fuzf9tawxrev93yxlfyxrfbmlnahrfz2fsyxh5x3dhbf8yoti1yzq3zc0xymu5ltrjzjityty1mi0yngzlnjvhmjm4mdhfms5qcgc_thumb.jpg",
+          "color": "#38212B"
+        }
+      ]
+    },
+    {
+      "id": "bikes",
+      "name": "Bikes",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "bikes_001",
+          "title": "Pexels-Photo-6306515",
+          "file": "pexels-photo-6306515.jpg",
+          "thumb": "pexels-photo-6306515_thumb.jpg",
+          "color": "#393635"
+        }
+      ]
+    },
+    {
+      "id": "fantasy",
+      "name": "Fantasy",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "fantasy_001",
+          "title": "C02F44F894Ea1C8F91C118A4F9Bf2Fda",
+          "file": "c02f44f894ea1c8f91c118a4f9bf2fda.jpg",
+          "thumb": "c02f44f894ea1c8f91c118a4f9bf2fda_thumb.jpg",
+          "color": "#182630"
+        },
+        {
+          "id": "fantasy_002",
+          "title": "Db5F5Bdfa705E5663E7B6Fe88Cf1Dd4F",
+          "file": "db5f5bdfa705e5663e7b6fe88cf1dd4f.jpg",
+          "thumb": "db5f5bdfa705e5663e7b6fe88cf1dd4f_thumb.jpg",
+          "color": "#A5AEA6"
+        }
+      ]
+    },
+    {
+      "id": "animals",
+      "name": "Animals",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "animals_001",
+          "title": "Chjpdmf0Zs9Sci9Pbwfnzxmvd2Vic2L0Zs8Ymdizlteyl3Jhd3Bpegvsx29Mzmljzv8Znl9Hzxn0Agv0Awnfd2Fsbhbhcgvyx2Jyb3Dux2Nhdf9Sawdodf9Zagfkb3Dfbv82Odhhmzqzmy1Jytflltqwmtitotdmos01Ogexmdg0Mwizmwquanbn",
+          "file": "chjpdmf0zs9sci9pbwfnzxmvd2vic2l0zs8ymdizlteyl3jhd3bpegvsx29mzmljzv8znl9hzxn0agv0awnfd2fsbhbhcgvyx2jyb3dux2nhdf9sawdodf9zagfkb3dfbv82odhhmzqzmy1jytflltqwmtitotdmos01ogexmdg0mwizmwquanbn.jpg",
+          "thumb": "chjpdmf0zs9sci9pbwfnzxmvd2vic2l0zs8ymdizlteyl3jhd3bpegvsx29mzmljzv8znl9hzxn0agv0awnfd2fsbhbhcgvyx2jyb3dux2nhdf9sawdodf9zagfkb3dfbv82odhhmzqzmy1jytflltqwmtitotdmos01ogexmdg0mwizmwquanbn_thumb.jpg",
+          "color": "#C4A78D"
+        }
+      ]
+    },
+    {
+      "id": "cars",
+      "name": "Cars",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "cars_001",
+          "title": "9A976B447C5B9033322579A2B1953B72",
+          "file": "9a976b447c5b9033322579a2b1953b72.jpg",
+          "thumb": "9a976b447c5b9033322579a2b1953b72_thumb.jpg",
+          "color": "#160F1C"
+        }
+      ]
+    },
+    {
+      "id": "galaxy",
+      "name": "Galaxy",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "galaxy_001",
+          "title": " ",
+          "file": "_.jpg",
+          "thumb": "__thumb.jpg",
+          "color": "#0C0C0C"
+        }
+      ]
+    },
+    {
+      "id": "gaming",
+      "name": "Gaming",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "gaming_001",
+          "title": "5D5Da7Cf28C1Cb00390E6117D2326022",
+          "file": "5d5da7cf28c1cb00390e6117d2326022.jpg",
+          "thumb": "5d5da7cf28c1cb00390e6117d2326022_thumb.jpg",
+          "color": "#201B12"
+        }
+      ]
+    },
+    {
+      "id": "neon",
+      "name": "Neon",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "neon_001",
+          "title": "  Voidpunk  ",
+          "file": "__voidpunk__.jpg",
+          "thumb": "__voidpunk___thumb.jpg",
+          "color": "#F6C9D8"
+        }
+      ]
+    },
+    {
+      "id": "underwater",
+      "name": "Underwater",
+      "icon": "image",
+      "wallpapers": [
+        {
+          "id": "underwater_001",
+          "title": "7103E1B76Fe866935Baa423A7Ef90Dba",
+          "file": "7103e1b76fe866935baa423a7ef90dba.jpg",
+          "thumb": "7103e1b76fe866935baa423a7ef90dba_thumb.jpg",
+          "color": "#598CB7"
         }
       ]
     }

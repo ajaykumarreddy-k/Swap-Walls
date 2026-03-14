@@ -4,6 +4,7 @@ import android.app.WallpaperManager
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
@@ -79,7 +80,7 @@ fun WallpaperDetailScreen(
                     }
                 }
             }
-            .clickable { showSheet = !showSheet } // Toggle UI visibility
+            .clickable(enabled = !showTargetDialog) { showSheet = !showSheet } // Disable click when dialog is open
         ) {
             wallpaper?.let { wp ->
                 AsyncImage(
@@ -99,9 +100,9 @@ fun WallpaperDetailScreen(
                         )
                 )
             }
- 
+
             // Animated UI overlay (Back button + Bottom Button)
-            if (showSheet) {
+            if (showSheet && !isSettingWallpaper) {
                 // Back button
                 IconButton(
                     onClick = onBack,
@@ -120,7 +121,7 @@ fun WallpaperDetailScreen(
 
                 // Bottom Floating Action Button for "Set Wallpaper"
                 ExtendedFloatingActionButton(
-                    onClick = { showTargetDialog = true },
+                    onClick = { if (wallpaper != null) showTargetDialog = true },
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .navigationBarsPadding()
@@ -129,20 +130,27 @@ fun WallpaperDetailScreen(
                     contentColor = MaterialTheme.colorScheme.onPrimary,
                     shape = RoundedCornerShape(24.dp)
                 ) {
-                    if (isSettingWallpaper) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(20.dp),
-                            color = MaterialTheme.colorScheme.onPrimary
-                        )
-                    } else {
-                        Text("Apply Wallpaper", fontWeight = FontWeight.Bold)
+                    Text("Apply Wallpaper", fontWeight = FontWeight.Bold)
+                }
+            }
+
+            // Loading overlay
+            if (isSettingWallpaper) {
+                Box(
+                    modifier = Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.5f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CircularProgressIndicator(color = Color.White)
+                        Spacer(Modifier.height(16.dp))
+                        Text("Setting wallpaper...", color = Color.White)
                     }
                 }
             }
         }
 
         // Dialog: choose Home / Lock / Both — Inside the Scaffold content
-        if (showTargetDialog) {
+        if (showTargetDialog && wallpaper != null) {
             AlertDialog(
                 onDismissRequest = { showTargetDialog = false },
                 confirmButton = {
@@ -172,9 +180,12 @@ fun WallpaperDetailScreen(
                                             flag
                                         )
                                         isSettingWallpaper = false
-                                        snackbarHostState.showSnackbar(
-                                            if (success) "Wallpaper set!" else "Failed. Please try again."
-                                        )
+                                        if (success) {
+                                            snackbarHostState.showSnackbar("Wallpaper set successfully!")
+                                            onBack() // Finish preview after applying
+                                        } else {
+                                            snackbarHostState.showSnackbar("Failed. Please try again.")
+                                        }
                                     }
                                 },
                                 modifier = Modifier.fillMaxWidth()
