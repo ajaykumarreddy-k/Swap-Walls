@@ -70,14 +70,14 @@ fun SettingsScreen(onBack: () -> Unit) {
             
             ListItem(
                 headlineContent = { Text("App Version") },
-                supportingContent = { Text("1.0.0 (WallDrop Core)") },
+                supportingContent = { Text("1.1.0 (Swap Walls Core)") },
                 leadingContent = { Icon(Icons.Default.Info, contentDescription = null) }
             )
             
             Spacer(modifier = Modifier.weight(1f))
             
             Text(
-                text = "Created with SwapWalls Architecture",
+                text = "Premium Wallpapers by Swap Walls",
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(bottom = 8.dp)
             )

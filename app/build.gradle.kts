@@ -13,8 +13,8 @@ android {
         applicationId = "com.swapwalls.walldrop"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
     }
 
     buildTypes {
@@ -34,6 +34,14 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.11"
+    }
+}
+
+// Custom APK naming for the release
+android.applicationVariants.all {
+    outputs.all {
+        val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+        output.outputFileName = "Swap Walls V1.1.apk"
     }
 }
 

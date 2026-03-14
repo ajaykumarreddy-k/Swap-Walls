@@ -1,15 +1,18 @@
 package com.swapwalls.walldrop.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.VolunteerActivism
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -18,12 +21,62 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DonationScreen(onBack: () -> Unit) {
+    var showScanner by remember { mutableStateOf(false) }
+
+    if (showScanner) {
+        AlertDialog(
+            onDismissRequest = { showScanner = false },
+            confirmButton = {
+                TextButton(onClick = { showScanner = false }) {
+                    Text("Close", fontWeight = FontWeight.Bold)
+                }
+            },
+            title = {
+                Text(
+                    "Scan to Support",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            text = {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Card(
+                        shape = RoundedCornerShape(16.dp),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color.White)
+                    ) {
+                        Image(
+                            painter = painterResource(id = com.swapwalls.walldrop.R.drawable.payment_scanner),
+                            contentDescription = "Payment QR Code",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)
+                                .aspectRatio(1f)
+                        )
+                    }
+                    
+                    Spacer(modifier = Modifier.height(16.dp))
+                    
+                    Text(
+                        text = "Scan this QR code with GPay, PhonePe, or any UPI app to support the developer.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        )
+    }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = { 
                     Text(
-                        "Support WallDrop",
+                        "Support Swap Walls",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     ) 
@@ -62,7 +115,7 @@ fun DonationScreen(onBack: () -> Unit) {
             Spacer(modifier = Modifier.height(24.dp))
             
             Text(
-                text = "Enjoying SwapWalls?",
+                text = "Enjoying Swap Walls?",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
@@ -80,7 +133,7 @@ fun DonationScreen(onBack: () -> Unit) {
             Spacer(modifier = Modifier.height(32.dp))
             
             Button(
-                onClick = { /* Handle donation logic or open link */ },
+                onClick = { showScanner = true },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 shape = MaterialTheme.shapes.large
             ) {
@@ -92,7 +145,7 @@ fun DonationScreen(onBack: () -> Unit) {
             Spacer(modifier = Modifier.height(16.dp))
             
             OutlinedButton(
-                onClick = { /* Open BuyMeACoffee */ },
+                onClick = { showScanner = true },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 shape = MaterialTheme.shapes.large
             ) {

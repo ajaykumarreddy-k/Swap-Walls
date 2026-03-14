@@ -1,4 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+drawable app_logo
+drawable payment_scanner
 string app_name
 style Theme.WallDrop

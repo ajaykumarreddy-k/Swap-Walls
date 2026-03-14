@@ -14,12 +14,12 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
 import com.swapwalls.walldrop.ui.screens.*
-import com.swapwalls.walldrop.ui.theme.WallDropTheme
+import com.swapwalls.walldrop.ui.theme.SwapWallsTheme
 
 @Composable
 fun MainScreen() {
@@ -61,10 +61,22 @@ fun MainScreen() {
             navController = navController,
             startDestination = "home",
             modifier = Modifier.padding(padding),
-            enterTransition = { fadeIn(animationSpec = tween(300)) + slideInHorizontally(animationSpec = tween(300)) { it / 4 } },
-            exitTransition = { fadeOut(animationSpec = tween(300)) + slideOutHorizontally(animationSpec = tween(300)) { -it / 4 } },
-            popEnterTransition = { fadeIn(animationSpec = tween(300)) + slideInHorizontally(animationSpec = tween(300)) { -it / 4 } },
-            popExitTransition = { fadeOut(animationSpec = tween(300)) + slideOutHorizontally(animationSpec = tween(300)) { it / 4 } }
+            enterTransition = { 
+                fadeIn(animationSpec = spring(stiffness = Spring.StiffnessLow)) + 
+                slideInHorizontally(animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessLow)) { it / 6 } 
+            },
+            exitTransition = { 
+                fadeOut(animationSpec = spring(stiffness = Spring.StiffnessLow)) + 
+                slideOutHorizontally(animationSpec = spring(stiffness = Spring.StiffnessLow)) { -it / 6 } 
+            },
+            popEnterTransition = { 
+                fadeIn(animationSpec = spring(stiffness = Spring.StiffnessLow)) + 
+                slideInHorizontally(animationSpec = spring(dampingRatio = Spring.DampingRatioLowBouncy, stiffness = Spring.StiffnessLow)) { -it / 6 } 
+            },
+            popExitTransition = { 
+                fadeOut(animationSpec = spring(stiffness = Spring.StiffnessLow)) + 
+                slideOutHorizontally(animationSpec = spring(stiffness = Spring.StiffnessLow)) { it / 6 } 
+            }
         ) {
             composable("home") {
                 HomeScreen(
@@ -123,7 +135,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            WallDropTheme {
+            SwapWallsTheme {
                 MainScreen()
             }
         }

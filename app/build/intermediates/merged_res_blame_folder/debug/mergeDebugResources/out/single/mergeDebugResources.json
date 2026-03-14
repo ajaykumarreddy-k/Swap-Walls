@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.swapwalls.walldrop.app-debug-68:/drawable_payment_scanner.jpg.flat",
+        "source": "com.swapwalls.walldrop.app-main-70:/drawable/payment_scanner.jpg"
+    },
+    {
+        "merged": "com.swapwalls.walldrop.app-debug-68:/drawable_app_logo.jpg.flat",
+        "source": "com.swapwalls.walldrop.app-main-70:/drawable/app_logo.jpg"
+    }
+]

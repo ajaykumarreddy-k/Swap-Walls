@@ -34,7 +34,7 @@ fun HomeScreen(
             CenterAlignedTopAppBar(
                 title = { 
                     Text(
-                        "WallDrop", 
+                        "Swap Walls", 
                         style = MaterialTheme.typography.headlineLarge,
                         fontWeight = FontWeight.ExtraBold,
                         letterSpacing = (-1).sp

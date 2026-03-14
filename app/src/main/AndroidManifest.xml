@@ -6,7 +6,8 @@
 
     <application
         android:allowBackup="true"
-        android:label="Swap Walls"
+        android:icon="@drawable/app_logo"
+        android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.WallDrop">
 
