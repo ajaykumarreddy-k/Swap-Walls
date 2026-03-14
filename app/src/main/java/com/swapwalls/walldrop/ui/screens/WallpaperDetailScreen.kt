@@ -106,9 +106,13 @@ fun WallpaperDetailScreen(
                     shape = RoundedCornerShape(24.dp)
                 ) {
                     if (isSettingWallpaper) {
-                    CircularProgressIndicator(size = 20.dp, color = MaterialTheme.colorScheme.onPrimary)
-                } else {
-                    Text("Apply Wallpaper", fontWeight = FontWeight.Bold)
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(20.dp),
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    } else {
+                        Text("Apply Wallpaper", fontWeight = FontWeight.Bold)
+                    }
                 }
             }
         }
