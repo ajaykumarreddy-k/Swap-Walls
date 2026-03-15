@@ -13,11 +13,14 @@ import os
 import sys
 import json
 import shutil
+import hashlib
 from pathlib import Path
 from datetime import date
  
 try:
-    from PIL import Image
+    from PIL import Image, ImageFile, ExifTags
+    # Allow PIL to load truncated images
+    ImageFile.LOAD_TRUNCATED_IMAGES = True
     from colorthief import ColorThief
 except ImportError:
     print("Run first: pip install Pillow colorthief")
@@ -41,6 +44,38 @@ def get_dominant_color(filepath: str) -> str:
         return "#{:02X}{:02X}{:02X}".format(r, g, b)
     except Exception:
         return "#1565C0"
+
+def get_file_hash(filepath: Path) -> str:
+    """Calculates MD5 hash of a file to detect duplicates."""
+    hasher = hashlib.md5()
+    with open(filepath, "rb") as f:
+        # Read in chunks for large files
+        for chunk in iter(lambda: f.read(4096), b""):
+            hasher.update(chunk)
+    return hasher.hexdigest()
+
+def is_copyrighted(img: Image.Image, filepath: Path) -> bool:
+    """Checks if an image is copyrighted based on metadata and filename."""
+    keywords = ["copyright", "(c)", "all rights reserved", "rights reserved"]
+    
+    # Check filename
+    filename_lower = filepath.name.lower()
+    if any(k in filename_lower for k in keywords):
+        return True
+        
+    # Check EXIF Metadata
+    try:
+        exif = img.getexif()
+        if exif:
+            for tag_id, value in exif.items():
+                tag_name = ExifTags.TAGS.get(tag_id, tag_id)
+                if tag_name in ["Copyright", "Artist"]:
+                    if isinstance(value, str) and any(k in value.lower() for k in keywords):
+                        return True
+    except Exception:
+        pass # Metadata might be corrupted
+        
+    return False
  
 def prepare_assets():
     input_root = Path("images")
@@ -62,6 +97,9 @@ def prepare_assets():
         print("No category subfolders found in 'images/'. Example: images/anime/")
         return
  
+    # To track duplicates across all categories
+    seen_hashes = set()
+
     for cat_dir in categories:
         cat_id = cat_dir.name.lower()
         print(f"Processing Category: {cat_dir.name}")
@@ -76,32 +114,56 @@ def prepare_assets():
             if img_path.suffix.lower() not in supported:
                 continue
             
-            print(f"  -> {img_path.name}")
-            stem = img_path.stem.lower().replace(" ", "_")
-            out_file = f"{stem}.jpg"
-            out_thumb = f"{stem}_thumb.jpg"
-            
-            # Save Full
-            img = Image.open(img_path).convert("RGB")
-            img = resize_image(img, FULL_MAX_WIDTH, FULL_MAX_HEIGHT)
-            img.save(cat_output / out_file, "JPEG", quality=QUALITY)
-            
-            # Save Thumb
-            img_t = Image.open(img_path).convert("RGB")
-            img_t = resize_image(img_t, THUMB_WIDTH, THUMB_HEIGHT)
-            img_t.save(cat_output / out_thumb, "JPEG", quality=QUALITY)
-            
-            # Color
-            color = get_dominant_color(str(cat_output / out_file))
-            
-            wallpapers.append({
-                "id": f"{cat_id}_{count:03d}",
-                "title": stem.replace("_", " ").title(),
-                "file": out_file,
-                "thumb": out_thumb,
-                "color": color
-            })
-            count += 1
+            try:
+                # Duplicate Check
+                img_hash = get_file_hash(img_path)
+                if img_hash in seen_hashes:
+                    print(f"  !! Skipping Duplicate: {img_path.name}")
+                    continue
+                
+                print(f"  -> {img_path.name}")
+                stem = img_path.stem.lower().replace(" ", "_")
+                out_file = f"{stem}.jpg"
+                out_thumb = f"{stem}_thumb.jpg"
+                
+                # Process Image
+                with Image.open(img_path) as img_orig:
+                    # Copyright Check
+                    if is_copyrighted(img_orig, img_path):
+                        print(f"  XX Flagged Copyrighted: {img_path.name} (DELETING)")
+                        # Close file before deleting if necessary (handled by with block)
+                        img_orig.close()
+                        os.remove(img_path)
+                        continue
+
+                    # Convert to RGB early
+                    img_rgb = img_orig.convert("RGB")
+                    
+                    # Save Full
+                    img_full = resize_image(img_rgb.copy(), FULL_MAX_WIDTH, FULL_MAX_HEIGHT)
+                    img_full.save(cat_output / out_file, "JPEG", quality=QUALITY)
+                    
+                    # Save Thumb
+                    img_thumb = resize_image(img_rgb.copy(), THUMB_WIDTH, THUMB_HEIGHT)
+                    img_thumb.save(cat_output / out_thumb, "JPEG", quality=QUALITY)
+                
+                # Color (from processed full image)
+                color = get_dominant_color(str(cat_output / out_file))
+                
+                wallpapers.append({
+                    "id": f"{cat_id}_{count:03d}",
+                    "title": stem.replace("_", " ").title(),
+                    "file": out_file,
+                    "thumb": out_thumb,
+                    "color": color
+                })
+                
+                seen_hashes.add(img_hash)
+                count += 1
+                
+            except Exception as e:
+                print(f"  !! Error processing {img_path.name}: {e}")
+                continue
             
         manifest["categories"].append({
             "id": cat_id,
